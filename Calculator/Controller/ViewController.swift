@@ -24,18 +24,19 @@ class ViewController: UIViewController {
         }
     }
     
+    private var calculator = CalculatorLogic()
     
     @IBAction func calcButtonPressed(_ sender: UIButton) {
         
         //What should happen when a non-number button is pressed
         isFinishedTypingNumbers = true
         
+        calculator.setNumber(displayValue)
+        
         if let calcMethod = sender.currentTitle {
-            let calculator = CalculatorLogic(number: displayValue)
-            
-            guard let result = calculator.calculate(symbol: calcMethod) else {fatalError("The result of calculation is nil")}
-            
-            displayValue = result
+            if let result = calculator.calculate(symbol: calcMethod) {
+                displayValue = result
+            }
         }
     
     }
